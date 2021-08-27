@@ -1,17 +1,19 @@
 import logo from './logo.svg';
 import './App.css';
+import Header from './header-component/header';
 //install bootstrap - package.json
 // npm install bootstrap - doc
 // we will be having this available in all child components
 import bootstrap from 'bootstrap';
 
-// the component itself is a function which is typical for a react component
+// the component itself is a function which is typical for a react component (functional)
 function App() {
   // the function returns the JSX that has to be rendered
   return (
     // what we see here for now are components that have an equivalent in HTML, but we will proceed in composing our own self-made components
     // everything must be contained in one node only
     <div className="App">
+      <Header />
       <header className="App-header">
         {/* JSX !== HTML */}
         {/* attributes in JSX are actually props */}
@@ -28,6 +30,7 @@ function App() {
           Learn React
         </a>
       </header>
+      <div></div>
     </div>
   );
 }
