@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import './App.css';
+import './main-page.css';
 //install bootstrap - package.json
 // npm install bootstrap - doc
 // we will be having this available in all child components

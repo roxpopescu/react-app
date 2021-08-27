@@ -5,7 +5,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 // file extensions are omitted for other modules
 // it imports a default member, {} are missing here
-import App from './App';
+// webpack knows that it has to use index.js (previously App.js)
+import App from './main-page';
 import reportWebVitals from './reportWebVitals';
 
 // this is the actual entry point which calls as follows
