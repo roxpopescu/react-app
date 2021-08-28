@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "address": "12 Valley of Kings, Geneva",
+        "country": "Switzerland",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "price" : 900000,
+        "photo": "277667"
+    },
+    {
+        "id": 2,
+        "address": "89 Road of Forks, Bern",
+        "country": "Switzerland",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "price" : 500000,
+        "photo": "462358"
+    },
+    {
+        "id": 3,
+        "address": "12 Valley of Kings, Geneva",
+        "country": "Netherlands",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "price" : 700000,
+        "photo": "277664"
+    }
+]
