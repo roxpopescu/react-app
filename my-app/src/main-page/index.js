@@ -4,10 +4,13 @@ import './main-page.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from "./header";
 import FeaturedHouse from "./featured-house";
+import SearchResults from '../search-results';
+import HouseFilter from './house-filter';
 // we import useEffect hook from the react library to load the data into index.js (houses.json in our case)
 // this is the specific naming convention for hooks in react
 // useEffect enables us to create side effects when the state of a component changes
 import { useEffect, useState, useMemo } from "react"
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 // we want to load data only just when the component is rendered for the first time, to avoid re-renderes and improve performance
 function App() {
@@ -36,15 +39,29 @@ function App() {
   }, [allHouses]);
   
   return (
-    // this is a bootstrap class
-    <div className="container">
-      {/* we can pass on multiple properties */}
-      <Header 
-        subtitle="Providing houses all over the world" 
-        title="Some title"
-      />
-      <FeaturedHouse house={featuredHouse} />
-    </div>
+    <Router>
+      {/* what we add directly in the Router will always be displayed no matter what the URL in the browser is */}
+      {/* this is a bootstrap class */}
+      <div className="container">
+        {/* we can pass on multiple properties */}
+        <Header 
+          subtitle="Providing houses all over the world" 
+          title="Some title"
+        />
+        <HouseFilter allHouses={allHouses} />
+        {/* Switch will check the child Route component to see if there is a match between the actual URL in the browser and the path specified by the Route */}
+        <Switch>
+          {/* we will be specifying the route path in the Route component */}
+          <Route exact path="/">
+            <FeaturedHouse house={featuredHouse} />
+          </Route>
+          {/* because of the > React knows that country is a value that is passed into the URL and it also knows how to call it */}
+          <Route path="/searchresults/:country">
+            <SearchResults allHouses={allHouses} />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
