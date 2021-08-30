@@ -3,7 +3,8 @@ import logo from './logo.png';
 // an arrow function that returns JSX -> a function component
 // the first argument passed into the function by react is a props object
 // we can also use destructuring to read from props object: {subtitle, title} and use it directly
-const Header = (props) => {
+// const Header = (props) => {
+const Header = ({subtitle, title}) => {
     return (
         // what we return in a function component must always have a root node
         // bootstrap grid system
@@ -15,7 +16,8 @@ const Header = (props) => {
             {/* we use the {} to indicate an expression */}
             {/* remember, props is an OBJECT */}
             {/* here we READ from it, we do have to PASS it somewhere - the component that uses the header - App.js will provide a value for the subtitle porperty of the props object */}
-            <div className="col-md-7 mt-5 subtitle">{props.subtitle}</div>
+            {/* <div className="col-md-7 mt-5 subtitle">{props.subtitle}</div> */}
+            <div className="col-md-7 mt-5 subtitle">{subtitle}</div>
         </header>
     )
 };
