@@ -1,10 +1,11 @@
 import SearchResultsRow from "./search-results-row";
+// another useful hook
 import { useParams } from "react-router-dom";
 
 const SearchResults = ({allHouses}) => {
     // data we have sent along in the URL
     const {country} = useParams();
-    const filteredHouses = allHouses.filter((h) => h.country === country)
+    const filteredHouses = allHouses.filter((h) => h.country === country);
 
     return(
         <div className="mt-2">

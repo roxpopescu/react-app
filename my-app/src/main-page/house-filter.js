@@ -1,3 +1,4 @@
+// useHistory is also a React hook
 import { useHistory } from "react-router-dom";
 
 const HouseFilter = ({allHouses}) => {
@@ -10,6 +11,8 @@ const HouseFilter = ({allHouses}) => {
     const onSearchChange = (e) => {
         // we want to know which country was selected by extracting the value from the arguments
         const country = e.target.value;
+        // pushing a new URL to the browsers' history
+        // note the usage of interpolated string
         history.push(`/searchresults/${country}`);
     };
 
