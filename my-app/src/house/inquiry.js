@@ -18,6 +18,7 @@ const Inquiry = () => {
         // each id matches a property name in the state object
         // with e.target.id we are overwritting that particular value
         // the value of the property is the value of the input
+        // each id matches a property name in the state object: name, email, remarks
         setContactInfo({...contactInfo, [e.target.id]: e.target.value});
     }
 

@@ -1,5 +1,5 @@
 // class components have to derive from the class COMPONENT that is in the react package which has to be imported
-import {Component} from ""
+import {Component} from "react";
 import logo from './logo.png';
 
 class Header extends Component {
