@@ -9,58 +9,45 @@ import HouseFilter from './house-filter';
 // we import useEffect hook from the react library to load the data into index.js (houses.json in our case)
 // this is the specific naming convention for hooks in react
 // useEffect enables us to create side effects when the state of a component changes
-import { useEffect, useState, useMemo } from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import useHouses from "../hooks/useHouses";
+import useFeaturedHouse from '../hooks/useFeaturedHouse';
+import HousesContext from "../context/houseContext";
 
-// we want to load data only just when the component is rendered for the first time, to avoid re-renderes and improve performance
 function App() {
-  // default value specified in useState
-  const [allHouses, setAllHouses] = useState([]);
-  // a hook is a function so we can call it
-  // its' first parameter is a function
-  useEffect(() => {
-    // the rest of the code continues execution while the houses are loaded
-    const fetchHouses = async() => {
-      const rsp = await fetch("/houses.json");
-      // the houses variable is now just locat to the fetchHouses function, we need to store it somewhere, because we want to access the houses array from elsewhere in the component too
-      const houses = await rsp.json();
-      // we are storing the fetched houses in the components' state
-      setAllHouses(houses);
-    };
-    fetchHouses();
-  }, []);
-
-  // we want to remember the featuredHouse once it is determined
-  const featuredHouse = useMemo(() => {
-    if(allHouses.length) {
-      const randomIndex = Math.floor(Math.random() * allHouses.length);
-      return allHouses[randomIndex];
-    };
-  }, [allHouses]);
+  // the App component is much cleaner now, it only concerns itself with the rendering part, the rest of the logic being DELEGATED to the custom hooks
+  // there is another advantage when working with custom hooks, nothing is preventing other componnets to also use these hooks, which opens up a lot of possibilities for reuse
+  const allHouses = useHouses();
+  const featuredHouse = useFeaturedHouse(allHouses);
   
   return (
     <Router>
-      {/* what we add directly in the Router will always be displayed no matter what the URL in the browser is */}
-      {/* this is a bootstrap class */}
-      <div className="container">
-        {/* we can pass on multiple properties */}
-        <Header 
-          subtitle="Providing houses all over the world" 
-          title="Some title"
-        />
-        <HouseFilter allHouses={allHouses} />
-        {/* Switch will check the child Route component to see if there is a match between the actual URL in the browser and the path specified by the Route */}
-        <Switch>
-          {/* we will be specifying the route path in the Route component */}
-          <Route exact path="/">
-            <FeaturedHouse house={featuredHouse} />
-          </Route>
-          {/* because of the > React knows that country is a value that is passed into the URL and it also knows how to call it */}
-          <Route path="/searchresults/:country">
-            <SearchResults allHouses={allHouses} />
-          </Route>
-        </Switch>
-      </div>
+      {/* the context object that we created contains a component called a Provider */}
+      {/* the value prop will be optionally accessibile by ALL child components, so we can stop using prop drilling and code clustering */}
+      <HousesContext.Provider value={allHouses}>
+        {/* what we add directly in the Router will always be displayed no matter what the URL in the browser is */}
+        {/* this is a bootstrap class */}
+        <div className="container">
+          {/* we can pass on multiple properties */}
+          <Header 
+            subtitle="Providing houses all over the world" 
+            title="Some title"
+          />
+          {/* in order to use the provider value we need to modify the cild components that might need to use this */}
+          <HouseFilter />
+          {/* Switch will check the child Route component to see if there is a match between the actual URL in the browser and the path specified by the Route */}
+          <Switch>
+            {/* we will be specifying the route path in the Route component */}
+            <Route exact path="/">
+              <FeaturedHouse house={featuredHouse} />
+            </Route>
+            {/* because of the > React knows that country is a value that is passed into the URL and it also knows how to call it */}
+            <Route path="/searchresults/:country">
+              <SearchResults />
+            </Route>
+          </Switch>
+        </div>
+      </HousesContext.Provider>
     </Router>
   );
 }

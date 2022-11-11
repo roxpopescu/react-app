@@ -1,8 +1,12 @@
 // useHistory is also a React hook
 import { useHistory } from "react-router-dom";
+import { useContext } from "react";
+import HousesContext from "../context/houseContext";
 
-const HouseFilter = ({allHouses}) => {
+// we don't need the destructuring of allHouses since is not passes as a prop anymore
+const HouseFilter = () => {
     const history = useHistory();
+    const allHouses = useContext(HousesContext);
     // filter the distinct countries from the houses json
     const countries = allHouses ? Array.from(new Set(allHouses.map((h) => h.country))) : [];
     countries.unshift(null);
